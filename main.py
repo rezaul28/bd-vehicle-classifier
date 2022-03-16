@@ -2,9 +2,11 @@ import cv2
 video =cv2.VideoCapture("./resource/cars.mp4")
 car = "./resource/car.xml"
 car_tracker = cv2.CascadeClassifier(car)
+i=0
 while True:
     (read,fram) = video.read()
     if(read):
+        fram = cv2.resize(fram, (700,450), interpolation = cv2.INTER_AREA)
         gray_image = cv2.cvtColor(fram,cv2.COLOR_BGR2GRAY)
     else:
         break
@@ -12,5 +14,8 @@ while True:
     print(cars)
     for (x,y,w,h) in cars:
         cv2.rectangle(fram,(x,y),(x+w,y+h),(255,0,255))
+    cv2.imwrite(str(i)+'.jpg', fram)
     cv2.imshow("Processed image",fram)
     cv2.waitKey(1)
+    i+=1
+    
