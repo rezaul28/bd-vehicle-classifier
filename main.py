@@ -6,8 +6,6 @@ root =os.getcwd()
 videoName = input("Enter video file name: ")
 video =cv2.VideoCapture("./resource/"+videoName)
 car = "./resource/car.xml"
-# bus="./resource/bus.xml"
-# img_folder=root+"photos"
 try:
     os.remove(root+"new.mp4")
 except:
@@ -18,12 +16,10 @@ except:
     pass
 os.mkdir(root+"photos")
 car_tracker = cv2.CascadeClassifier(car)
-# bus_tracker = cv2.CascadeClassifier(bus)
-i=0
 while True:
     (read,fram) = video.read()
     if(read):
-        fram = cv2.resize(fram, (700,450), interpolation = cv2.INTER_AREA)
+        fram = cv2.resize(fram, (300,300), interpolation = cv2.INTER_AREA)
         gray_image = cv2.cvtColor(fram,cv2.COLOR_BGR2GRAY)
     else:
         break
